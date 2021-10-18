@@ -648,7 +648,7 @@ public class MainController {
         loader.setLocation(Main.class.getResource("/view/orderAddForm.fxml"));
         Parent page = loader.load();
         Stage window = new Stage();
-        if (NewCarController.typeQuery == "Insert") window.setTitle("Добавление заказа"); // Изменение заголовка в зависимости от типа действия
+        if (NewOrderController.typeQuery.equals("Insert")) window.setTitle("Добавление заказа"); // Изменение заголовка в зависимости от типа действия
         else window.setTitle("Изменение заказа");
         window.initModality(Modality.APPLICATION_MODAL);
         window.initOwner(Main.getPrimaryStage());
@@ -706,6 +706,7 @@ public class MainController {
         showOrderForm(order, client);
         if (order.getIdOrder() != 0)
             ordersList.add(order);
+        dataOrdersDisplay();
     }
 
     // Изменение объекта Order
@@ -719,7 +720,7 @@ public class MainController {
         Client selectedClient = ClientMethods.getClient(selectedOrder.getIdClient());
         // Если его не выбрали ничего не происходит
         if (selectedOrder != null) {
-            NewCarController.typeQuery = "Update";
+            NewOrderController.typeQuery = "Update";
             showOrderForm(selectedOrder, selectedClient);
             dataOrdersDisplay();
         }
